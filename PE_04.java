@@ -2,7 +2,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class PE_04 {
-    // LLums globals
+    // Llums globals
     static boolean restroomLight;
     static boolean kitchenLight;
     static boolean livingRoomLight;
@@ -14,6 +14,12 @@ public class PE_04 {
     static boolean panoramicwind;
     static boolean allwindows;
 
+    // Roomba globals
+    static boolean clKitchen;
+    static boolean clLiving;
+    static boolean clRestroom; 
+    static boolean clAllHouse;
+
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int question = 0;
@@ -23,18 +29,20 @@ public class PE_04 {
             System.out.println("Lighting control system.");
             System.out.println("-----------------------------");
             System.out.println("Select an option: ");
-            System.out.println("1) Lights");
-            System.out.println("2) Windows");
+            System.out.println("1) Lights💡");
+            System.out.println("2) Windows 🪟");
+            System.out.println("3) Roomba 🧹");
             System.out.println("--------------------");
 
             try {
                 question = input.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a number.");
-                input.nextLine(); // netejar buffer
+                input.nextLine(); // limpiar buffer
                 continue;
             }
 
+            // Menú llums
             if (question == 1) {
                 System.out.println("1) Restroom Lights");
                 System.out.println("2) Kitchen Lights");
@@ -45,10 +53,10 @@ public class PE_04 {
 
                 int lightOption;
                 try {
-                    lightOption = input.nextInt(); 
+                    lightOption = input.nextInt();
                 } catch (InputMismatchException e) {
                     System.out.println("Invalid input. Please enter a number between 1 and 4.");
-                    input.nextLine(); // netejar  buffer
+                    input.nextLine();
                     continue;
                 }
 
@@ -100,18 +108,30 @@ public class PE_04 {
                 updateAllLights();
                 System.out.println("All lights ON? " + allLights);
                 System.out.println();
+            }
 
-            } else if (question == 2) {
-                windowsMenu(input); // menú de finestres amb el metodè apart 
+            // Crida de metodè finestres
+            if (question == 2) {
+                windowsMenu(input);
                 System.out.println();
+            }
 
-            } else {
-                System.out.println("Invalid main option. Try again.");
+            // Roomba
+            if (question == 3) {
+                roombamenu(input);
+                System.out.println();
+            }
+
+            if (question == 4) {
+                System.out.println("Shutting down the system...");
+                break; // Sortir del bucle
             }
         }
+
+        input.close();
     }
 
-    // Metode llum
+    // Metodés llums
     public static void updateAllLights() {
         allLights = restroomLight && kitchenLight && livingRoomLight;
     }
@@ -133,7 +153,7 @@ public class PE_04 {
             windowsoption = input.nextInt();
         } catch (InputMismatchException e) {
             System.out.println("Invalid input. Please enter a number between 1 and 4.");
-            input.nextLine(); // netejar buffer
+            input.nextLine();
             return;
         }
 
@@ -186,8 +206,50 @@ public class PE_04 {
         System.out.println("All windows OPEN? " + allwindows);
     }
 
-    // Estat global de finestres.
+    // Estat global finestres
     public static void updateAllWindows() {
         allwindows = kitchenwind && livingRoomwind && panoramicwind;
+    }
+
+    public static void roombamenu(Scanner input){
+        System.out.println();
+        System.out.println("Options for roomba: ");
+        System.out.println();
+        System.out.println("1) Clean kitchen");
+        System.out.println("2) Clean Living Room ");
+        System.out.println("3) Clean restroom");
+        System.out.println("4) Clean all the House");
+        System.out.println("--------------------");
+        System.out.print("Select an option: ");
+
+        int roombamenu;
+        try{
+            roombamenu = input.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter a number between 1 and 4.");
+            input.nextLine();
+            return;
+        }
+        switch (roombamenu) {
+            case 1:
+            clKitchen = !clKitchen;
+                if (clKitchen) {
+                    System.out.println("Kitchen is now Cleaning");
+                } else {
+                    System.out.println("Kitchen is not cleanning or turned OFF");
+                }
+                break;
+                case 2:
+                
+                clLiving = !clLiving;
+                if (clLiving) {
+                    System.out.println("Living Room now is cleaning");
+                } else{
+                    System.out.println("Living room is not cleaning");
+                }
+                break;
+            default:
+                break;
+        }
     }
 }
