@@ -115,7 +115,7 @@ public class PE_04 {
 
             // Menú temperatura
             if (question == 4) {
-                // temperaturemenu(input);
+                temperaturemenu(input);
             }
 
             // Estat general del sistema (Work in progress)
@@ -145,7 +145,7 @@ public class PE_04 {
    
     public static void windowsMenu(Scanner input) {
         System.out.println();
-        System.out.println(" WINDOWS CONTROL");
+        System.out.println("WINDOWS CONTROL");
         System.out.println("1) Kitchen Window");
         System.out.println("2) Living Room Window");
         System.out.println("3) Panoramic Window");
@@ -205,7 +205,7 @@ public class PE_04 {
 
         do {
             System.out.println();
-            System.out.println("🧹 ROOMBA CONTROL");
+            System.out.println("ROOMBA CONTROL");
             System.out.println("1) Clean kitchen");
             System.out.println("2) Clean living room");
             System.out.println("3) Clean restroom");
@@ -275,10 +275,32 @@ public class PE_04 {
         } while (roombamenu != 5);
     }
 
+        public static void temperaturemenu(Scanner input) {
+        int temperaturemenu = 0;
+
+            do{
+                System.out.println();
+                System.out.println("Temperature CONTROL");
+                System.out.println("1) Clean kitchen");
+                System.out.println("2) Clean living room");
+                System.out.println("3) Clean restroom");
+                System.out.println("4) Clean all the house");
+                System.out.println("5) Return to main menu");
+                System.out.println("------------------------------");
+                System.out.print("Select an option: ");
+                try {
+                temperaturemenu = input.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number between 1 and 5.");
+                input.nextLine();
+                continue;
+            }
+        }
+    }
     
-    // Mètode auxiliar: preguntar hora
+    // Mètode auxiliar: preguntar hora & amb un do while, es una mica nynyogi pero volia provar.
     
-    private static int preguntarHora(Scanner input, String habitacio) {
+    public static int preguntarHora(Scanner input, String habitacio) {
         int hora = -1;
         boolean correcte = false;
 
@@ -298,5 +320,6 @@ public class PE_04 {
         } while (!correcte);
 
         return hora;
+
     }
 }
